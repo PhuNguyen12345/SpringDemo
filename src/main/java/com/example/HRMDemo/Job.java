@@ -27,49 +27,49 @@ public class Job {
 	@Column(name = "min_salary", columnDefinition = "DECIMAL" , precision = 14, scale = 2) 
 	private BigDecimal minSalary;
 
-	public Job(Long id, String jobTitle, BigDecimal maxSalary, BigDecimal minSalary) {
-		super();
-		this.id = id;
-		this.jobTitle = jobTitle;
-		this.maxSalary = maxSalary;
-		this.minSalary = minSalary;
-	}
-
-	public Job() {
-		super();
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getJobTitle() {
-		return jobTitle;
-	}
-
-	public void setJobTitle(String jobTitle) {
-		this.jobTitle = jobTitle;
-	}
-
-	public BigDecimal getMaxSalary() {
-		return maxSalary;
-	}
-
-	public void setMaxSalary(BigDecimal maxSalary) {
-		this.maxSalary = maxSalary;
-	}
-
-	public BigDecimal getMinSalary() {
-		return minSalary;
-	}
-
-	public void setMinSalary(BigDecimal minSalary) {
-		this.minSalary = minSalary;
-	}
+//	public Job(Long id, String jobTitle, BigDecimal maxSalary, BigDecimal minSalary) {
+//		super();
+//		this.id = id;
+//		this.jobTitle = jobTitle;
+//		this.maxSalary = maxSalary;
+//		this.minSalary = minSalary;
+//	}
+//
+//	public Job() {
+//		super();
+//	}
+//
+//	public Long getId() {
+//		return id;
+//	}
+//
+//	public void setId(Long id) {
+//		this.id = id;
+//	}
+//
+//	public String getJobTitle() {
+//		return jobTitle;
+//	}
+//
+//	public void setJobTitle(String jobTitle) {
+//		this.jobTitle = jobTitle;
+//	}
+//
+//	public BigDecimal getMaxSalary() {
+//		return maxSalary;
+//	}
+//
+//	public void setMaxSalary(BigDecimal maxSalary) {
+//		this.maxSalary = maxSalary;
+//	}
+//
+//	public BigDecimal getMinSalary() {
+//		return minSalary;
+//	}
+//
+//	public void setMinSalary(BigDecimal minSalary) {
+//		this.minSalary = minSalary;
+//	}
 
 	
 	

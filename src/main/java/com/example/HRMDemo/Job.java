@@ -70,7 +70,11 @@ public class Job {
 //	public void setMinSalary(BigDecimal minSalary) {
 //		this.minSalary = minSalary;
 //	}
-
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return "id: "+id + " title: "+jobTitle+" Max Salary: "+maxSalary+" Min Salary: "+minSalary; 
+	}
 	
 	
 	

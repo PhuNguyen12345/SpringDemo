@@ -85,6 +85,23 @@ public class JobRepositoryImpl implements JobRepository {
 	@Override
 	public boolean delete(Job job) {
 		// TODO Auto-generated method stub
+		//Transaction Definition 
+		EntityTransaction transaction = null; 
+		//try-catch to start transaction 
+		try (EntityManager manager = JpaUtil.getEntityManager()) { 
+			//Create transaction 
+			transaction = manager.getTransaction(); 
+			//begin transaction 
+			transaction.begin(); 
+			//check if job is not null 
+			if (job != null) {
+				manager.remove(job); 
+				//return stat 
+				return true; 
+			} 
+		} catch (Exception e) {
+			System.out.println(e.getMessage()); 
+		}
 		return false;
 	}
 

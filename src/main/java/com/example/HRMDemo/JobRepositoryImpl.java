@@ -76,7 +76,7 @@ public class JobRepositoryImpl implements JobRepository {
 			return job;
 		} catch (Exception e) {
 			if (entityTransaction != null && entityTransaction.isActive()) {
-
+				System.out.println(e.getMessage()); 
 			}
 		}
 		return null;
@@ -95,7 +95,12 @@ public class JobRepositoryImpl implements JobRepository {
 			transaction.begin(); 
 			//check if job is not null 
 			if (job != null) {
-				manager.remove(job); 
+				//Get job by id
+				Job j = manager.find(Job.class, job.getId()); 
+				//Check if found job is not null 
+				if (job != null) 
+				//Delete by id
+				manager.remove(j); 
 				//return stat 
 				return true; 
 			} 
@@ -108,6 +113,30 @@ public class JobRepositoryImpl implements JobRepository {
 	@Override
 	public List<Job> findByJobName(String jobName) {
 		// TODO Auto-generated method stub
+		//Identify the new list 
+		List<Job> jobList = new ArrayList<Job>(); 
+		//Transaction definition 
+		EntityTransaction transaction = null; 
+		//try-catch block to start transaction with entityManager  
+		try (EntityManager manager = JpaUtil.getEntityManager()) {
+			//Create transaction 
+			transaction = manager.getTransaction(); 
+			//begin transaction 
+			transaction.begin(); 
+			//Identify the native query 
+			Query query = manager.createNativeQuery("SELECT [id]\r\n"
+					+ "      ,[job_title]\r\n"
+					+ "      ,[max_salary]\r\n"
+					+ "      ,[min_salary]\r\n"
+					+ "  FROM [HR_DB].[hr].[job]\r\n"
+					+ "  where [job_title] like '%"+jobName+"%'", Job.class);   
+			//Get the result set based on the query 
+			jobList = query.getResultList(); 
+			//return jobList
+			return jobList; 
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 		return null;
 	}
 

@@ -12,10 +12,10 @@ public class App {
 	public static void main(String[] args) {
 		// 1. Adding new job
 //		Job job = new Job();
-//		job.setJobTitle("NodeJS Developer");
-//		job.setMaxSalary(new BigDecimal(5000));
-//		job.setMinSalary(new BigDecimal(1500));
-
+//		job.setJobTitle("Java Project Mgr.");
+//		job.setMaxSalary(new BigDecimal(8000));
+//		job.setMinSalary(new BigDecimal(3000));
+//
 		JobRepository jobRepository = new JobRepositoryImpl();
 //		System.out.println(jobRepository.save(job));
 		// 2. Get all
@@ -31,19 +31,24 @@ public class App {
 //        Job j = jobRepository.findById(id); 
 //        //display 
 //        System.out.println(j); 
-		// 4. find by name
-//        String jobName = "Java"; 
-//        //Get the list pf data by name 
-//        List<Job> jobList = jobRepository.findByJobName(jobName); 
-//        //Iterate  
-//        for (Job j : jobList) {
-//        	//Display 
-//        	System.out.println(j); 
-//        }
+//		 4. find by name
+        String jobName = "Java"; 
+        //Get the list of data by name 
+        List<Job> jobList = jobRepository.findByJobName(jobName); 
+        //Iterate  
+        for (Job j : jobList) {
+        	//Display 
+        	System.out.println(j); 
+        }
 		//5. Delete a job 
-		Job j = jobRepository.findById(3); 
-		//delete 
-		jobRepository.delete(j);   
+//		Job j = jobRepository.findById(3); 
+//		//Check if deleted 
+//		if (jobRepository.delete(j)) {
+//			System.out.println("Deleted successfully."); 
+//		}
+//		else {
+//			System.out.println("Deleted unsucessfully.");
+//		}
 		
 	}
 }

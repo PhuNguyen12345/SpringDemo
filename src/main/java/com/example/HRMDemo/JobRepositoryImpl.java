@@ -6,6 +6,7 @@ import java.util.List;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Query;
+import jakarta.persistence.TypedQuery;
 import jakarta.transaction.TransactionManager;
 
 public class JobRepositoryImpl implements JobRepository {
@@ -70,7 +71,7 @@ public class JobRepositoryImpl implements JobRepository {
 			entityTransaction.begin();
 			// save
 			entityManager.persist(job);
-			// commit = close cnn
+			// commit = save changes to DB 
 			entityTransaction.commit();
 
 			return job;
@@ -98,9 +99,11 @@ public class JobRepositoryImpl implements JobRepository {
 				//Get job by id
 				Job j = manager.find(Job.class, job.getId()); 
 				//Check if found job is not null 
-				if (job != null) 
+				if (j != null) 
 				//Delete by id
 				manager.remove(j); 
+				//commit to save changes on DB 
+				transaction.commit(); 
 				//return stat 
 				return true; 
 			} 
@@ -124,12 +127,16 @@ public class JobRepositoryImpl implements JobRepository {
 			//begin transaction 
 			transaction.begin(); 
 			//Identify the native query 
-			Query query = manager.createNativeQuery("SELECT [id]\r\n"
-					+ "      ,[job_title]\r\n"
-					+ "      ,[max_salary]\r\n"
-					+ "      ,[min_salary]\r\n"
-					+ "  FROM [HR_DB].[hr].[job]\r\n"
-					+ "  where [job_title] like '%"+jobName+"%'", Job.class);   
+//			Query query = manager.createNativeQuery("SELECT [id]\r\n"
+//					+ "      ,[job_title]\r\n"
+//					+ "      ,[max_salary]\r\n"
+//					+ "      ,[min_salary]\r\n"
+//					+ "  FROM [HR_DB].[hr].[job]\r\n"
+//					+ "  where [job_title] like '%"+jobName+"%'", Job.class);   
+			//Opt.2: Using JPQL (Should use) 
+			TypedQuery<Job> query = manager.createQuery("SELECT j from Job j where j.jobTitle like :constraint", Job.class); 
+			//Set param for constraint var ==> Reduce SQL Injection 
+			query.setParameter("constraint", (String) "%"+jobName+"%"); 
 			//Get the result set based on the query 
 			jobList = query.getResultList(); 
 			//return jobList
@@ -143,6 +150,21 @@ public class JobRepositoryImpl implements JobRepository {
 	@Override
 	public List<Job> findAll(int pageIndex, int pageSize) {
 		// TODO Auto-generated method stub
+		//Identify the list 
+		List<Job> jobList = new ArrayList<Job>(); 
+		//Transaction def. 
+		EntityTransaction transaction = null; 
+		//try-catch block to start transaction 
+		try (EntityManager manager = JpaUtil.getEntityManager()) {
+			//JPQL Query get data from first index + 1 to firstResultIndex + size  
+			TypedQuery<Job> query = manager.createQuery("Select j from Job j", Job.class).setFirstResult(pageIndex * pageSize).setMaxResults(pageSize); 
+			//get list 
+			jobList = query.getResultList(); 
+			//return list 
+			return jobList; 
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+ 		}
 		return null;
 	}
 

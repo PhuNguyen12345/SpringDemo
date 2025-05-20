@@ -12,7 +12,7 @@
 				value="123" />          <!-- Hibernate config -->
 			<property name="hibernate.dialect"
 				value="org.hibernate.dialect.SQLServerDialect" />
-			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<property name="hibernate.hbm2ddl.auto" value="update" />  <!-- Auto table-generation  -->
 			<property name="hibernate.show_sql" value="true" />
 		</properties>
 	</persistence-unit>

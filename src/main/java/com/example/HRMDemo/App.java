@@ -1,8 +1,12 @@
 package com.example.HRMDemo;
 
-import com.example.HRMDemo.Job;
 import java.math.BigDecimal;
 import java.util.List;
+
+import com.example.HRMDemo.Entity.Employee;
+import com.example.HRMDemo.Entity.Job;
+import com.example.HRMDemo.Implementation.JobRepositoryImpl;
+import com.example.HRMDemo.Repository.JobRepository;
 
 /**
  * Hello world!
@@ -19,12 +23,13 @@ public class App {
 		JobRepository jobRepository = new JobRepositoryImpl();
 //		System.out.println(jobRepository.save(job));
 		// 2. Get all
-//        List<Job> jobList = jobRepository.findAll(); 
-//        //Display 
-//        for (Job j : jobList) {
-//        	//Display 
-//        	System.out.println(j); 
-//        }
+        List<Job> jobList = jobRepository.findAll(); 
+        //Display 
+        for (Job j : jobList) {
+        	//Display 
+        	System.out.println(j); 
+        }
+        
 		// 3. Find by id
 //        long id = 1; 
 //        //get by id 
@@ -32,14 +37,14 @@ public class App {
 //        //display 
 //        System.out.println(j); 
 //		 4. find by name
-        String jobName = "Java"; 
-        //Get the list of data by name 
-        List<Job> jobList = jobRepository.findByJobName(jobName); 
-        //Iterate  
-        for (Job j : jobList) {
-        	//Display 
-        	System.out.println(j); 
-        }
+//        String jobName = "Java"; 
+//        //Get the list of data by name 
+//        List<Job> jobList = jobRepository.findByJobName(jobName); 
+//        //Iterate  
+//        for (Job j : jobList) {
+//        	//Display 
+//        	System.out.println(j); 
+//        }
 		//5. Delete a job 
 //		Job j = jobRepository.findById(3); 
 //		//Check if deleted 
